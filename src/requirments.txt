@@ -1,0 +1,16 @@
+fastapi==0.135.1
+uvicorn[standard]==0.41.0
+python-multipart==0.0.22
+python-dotenv==1.2.2
+pydantic-settings==2.13.1
+aiofiles==23.2.1
+langchain==1.2.12
+pyMuPDF==1.24.14
+langchain-community== 0.4.1
+pymongo==4.16.0
+python-docx==1.1.0
+pdfplumber==0.11.4  
+ebooklib==0.18  
+beautifulsoup4==4.12.3  
+Openai==1.35.13
+cohere==5.5.8

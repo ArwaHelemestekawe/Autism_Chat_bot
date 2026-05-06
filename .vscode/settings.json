@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": "/home/arwah/miniconda3/envs/autism/bin/python",
+  "python.analysis.extraPaths": [
+    "./"
+  ],
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.defaultPackageManager": "ms-python.python:conda",
+  "python.languageServer": "Pylance"
+}
