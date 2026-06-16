@@ -13,7 +13,7 @@ class Coher_Enums(Enum):
     USER="USER"
     ASSISTANT="CHATBOT"
     DOCUMENT="search_document"
-    QUARY="search_query"
+    QUERY="search_query"
 
 class Document_type(Enum):
     DOCUMENT="document"

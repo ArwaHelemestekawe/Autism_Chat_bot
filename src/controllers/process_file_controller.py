@@ -39,7 +39,7 @@ class Process_controller(Base_controllers):
        if loader:
         return loader.load()
        #else:
-           #return Responses.FILE_NOT_FOUNDED_IN_DATA_BASE.value
+           #n return Responses.FILE_NOT_FOUNDED_IN_DATA_BASE.value
     # اللودر بيرجع ليست فيها ميتا داتا وفيها كل الصفح
     
     def process_file_content(self,file_content:list,category_id:str,

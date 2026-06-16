@@ -7,16 +7,18 @@ class OpenAIProvider(LLMInterface):
     def __init__(self,api_key:str,api_url:str=None,
                  defualt_input_max_tokens:int=1000,
                  defualt_output_max_tokens:int=1000,
-                 defualt_generation_temp=0.5):
+                 defualt_generation_tempreture=0.5):
         self.api_key=api_key
         self.api_url=api_url
-        self.defualt_input_max_tokens=defualt_input_max_tokens
-        self.defualt_output_max_tokens=defualt_output_max_tokens
-        self.defualt_generation_temp=defualt_generation_temp
+        self.default_input_max_tokens=defualt_input_max_tokens
+        self.default_output_max_tokens=defualt_output_max_tokens
+        self.default_generation_tempreture=defualt_generation_tempreture
 
         self.generation_model_id=None
         self.embedding_model_id=None
         self.vector_size=None
+        self.enums=OpenAIEnums
+
 
         self.client=OpenAI(
             api_key=self.api_key,
@@ -44,7 +46,7 @@ class OpenAIProvider(LLMInterface):
         if not self.generation_model_id:
             self.logger.error("generation model should be provided")
             return None
-        max_output_tokens=max_output_tokens if max_output_tokens  else self.defualt_output_max_tokens
+        max_output_tokens=max_output_tokens if max_output_tokens  else self.default_output_max_tokens
         
 
 

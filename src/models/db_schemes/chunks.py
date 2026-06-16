@@ -45,3 +45,8 @@ Search embeddings in chunks for answers.
 
 Pull metadata from the parent book when needed (e.g., show title, author).
 '''
+
+
+class RetrivedOcument(BaseModel):
+    content:str
+    score:float

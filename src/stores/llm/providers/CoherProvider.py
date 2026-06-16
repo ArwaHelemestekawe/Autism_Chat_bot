@@ -4,22 +4,23 @@ import cohere
 import logging
 class Cohere(LLMInterface):
     def __init__(self,api_key:str,
-                 defualt_input_max_tokens:int=1000,
-                 defualt_output_max_tokens:int=1000,
-                 defualt_generation_temp=0.5):
+                 default_input_max_tokens:int=1000,
+                 default_output_max_tokens:int=1000,
+                 default_generation_tempreture=0.5):
         self.api_key=api_key
-        self.defualt_input_max_tokens=defualt_input_max_tokens
-        self.defualt_output_max_tokens=defualt_output_max_tokens
-        self.defualt_generation_temp=defualt_generation_temp
+        self.default_input_max_tokens=default_input_max_tokens
+        self.default_output_max_tokens=default_output_max_tokens
+        self.default_generation_tempreture=default_generation_tempreture
 
         self.generation_model_id=None
         self.embedding_model_id=None
         self.vector_size=None
+        self.enums=Coher_Enums
 
-        self.client=cohere(
+        self.client=cohere.Client(
             api_key=self.api_key,
         )
-        self.tempreture=0.5
+        self.tempereture=0.5
         self.logger=logging.getLogger(__name__)
 
 # why i just not but as an argument in the init constructor ? abo bakr said that we mightnot want the open ai to be the only 
@@ -30,7 +31,7 @@ class Cohere(LLMInterface):
 
 
     def set_embedding_model(self,model_id:str,embeding_size:int):
-        self.embedidng_model_id=model_id
+        self.embedding_model_id=model_id
         self.vector_size=embeding_size
 
 
@@ -41,7 +42,7 @@ class Cohere(LLMInterface):
         if not self.generation_model_id:
             self.logger.error("generation model should be provided")
             return None
-        max_output_tokens=max_output_tokens if max_output_tokens  else self.defualt_output_max_tokens
+        max_output_tokens=max_output_tokens if max_output_tokens  else self.default_output_max_tokens
         
 
 
@@ -53,8 +54,8 @@ class Cohere(LLMInterface):
             model=self.generation_model_id,
             chat_history=chat_history,
             message=self.process_text(text=prompt_input),
-            max_tokens=self.defualt_output_max_tokens,
-            temperature=self.tempreture
+            max_tokens=self.default_output_max_tokens,
+            temperature=self.default_generation_tempreture
         )
 
         if not response or not response.text :
@@ -68,7 +69,7 @@ class Cohere(LLMInterface):
 
 
 
-    def embed_text(self,text:str,document_type=None):
+    def embed_text(self,text:str,document_type=None): # document or query
         if not self.client:
             self.logger.error("Embedding model is not set error in passing client info")
             return None
@@ -78,15 +79,15 @@ class Cohere(LLMInterface):
         
         input_type=Coher_Enums.DOCUMENT.value
 
-        if document_type==Document_type.QUARY.value:
-            input_type=Coher_Enums.QUARY.value
+        if document_type==Document_type.QUERY.value:
+            input_type=Coher_Enums.QUERY.value
         
 
         response=self.client.embed(
             model=self.embedding_model_id,
-            text=[self.process_text(text=text)],
+            texts=[self.process_text(text=text)],
             input_type=input_type,
-            embedding_types=[float]
+            embedding_types=["float"]
         )
         if not response or not response.embeddings  or not response.embeddings.float:
             self.logger.error("Error while embedding text with cohere")
@@ -103,7 +104,7 @@ class Cohere(LLMInterface):
         
 
     def process_text(self,text:str):
-        return text[:self.defualt_input_max_tokens]
+        return text[:self.default_input_max_tokens]
 
 
      

@@ -38,6 +38,20 @@ class Chunk_model(Data_base_Base_mode):
             await self.collection.bulk_write(operations)
 
         return len(chunks)
+    
+
+    async def get_all_chunk_of_specific_category(self,category_id:str,page_num:int=1,page_size:int=50):
+        result=await self.collection.find({
+            
+        }).skip((page_num-1)*page_size).limit(page_size).to_list(length=None)
+
+        return[
+            Chunk(**rec)
+            for rec in result
+        ]
+
+
+
 
 
 
