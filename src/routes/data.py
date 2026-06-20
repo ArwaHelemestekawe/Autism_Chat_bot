@@ -6,8 +6,11 @@ import os
 from src.repository.chunk_model import Chunk_model
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError 
-from src.models.db_schemes.books import Book
-from src.models.db_schemes.papers import Paper
+
+from src.models.db_schemes.Autism_chat_bot_postgres.scheme.books import Books
+from src.models.db_schemes.Autism_chat_bot_postgres.scheme.papers import Papers
+
+
 from src.helpers.config import get_settings,Settings
 from src.controllers.Datacontrollers import Datacontrollers
 from src.models.enums.response_enums import Responses

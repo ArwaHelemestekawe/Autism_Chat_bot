@@ -6,15 +6,25 @@ from src.stores.llm.templete.temp_parser import TemplateParser
 from src.stores.vector_db.vector_db_factory import VectorDBProviderFactory
 from src.stores.llm.LLMfactory import LLMProviderFactory
 from src.stores.llm.providers.CoherProvider import Cohere
-from pymongo import AsyncMongoClient
+#from pymongo import AsyncMongoClient
+from sqlalchemy.ext.asyncio import create_async_engine,AsyncSession
+from sqlalchemy.orm import sessionmaker
 from src.helpers.config import get_settings
 app=FastAPI()
 
 @app.on_event("startup")
 async def start_up_db_client():
     settings=get_settings()
-    app.mongo_connection=AsyncMongoClient(settings.MONGO_URL)
-    app.db_client=app.mongo_connection[settings.MONGO_DATABASE]
+
+    postgres_connection=f"postgressql+asyncpg://{settings.POSTGRES_USERNAME}:{settings.POSTGRES_PASSWORD}@localhost:5432/{settings.POSTGRESS_MAIN_DATA_BASE}"
+    app.db_engine=create_async_engine(postgres_connection)
+    app.db_client=sessionmaker(app.db_engine,
+                               class_=AsyncSession,
+                               expire_on_commit=False
+                               )
+    
+    #app.mongo_connection=AsyncMongoClient(settings.MONGO_URL)
+    #app.db_client=app.mongo_connection[settings.MONGO_DATABASE]
 
     llm_provider_factory=LLMProviderFactory(settings)
     vector_db_factory=VectorDBProviderFactory(settings)
@@ -39,7 +49,8 @@ async def start_up_db_client():
 
 @app.on_event("shutdown")
 async def shut_down_db_client():
-   await app.mongo_connection.close()
+   app.db_engine.dispose()
+   #await app.mongo_connection.close()
    app.vector_db_client.disconnect()
 
 

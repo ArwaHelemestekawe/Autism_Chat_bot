@@ -35,6 +35,14 @@ class Settings(BaseSettings):
     LANGUAGE:str
 
 
+    #_____________________postgres______________
+    POSTGRES_USERNAME:str
+    POSTGRES_PASSWORD:str
+    POSTGRES_HOST :str
+    POSTGRES_PORT:int
+    POSTGRESS_MAIN_DATA_BASE:str
+
+
 
     class Config:
         env_file="src/.env.example"

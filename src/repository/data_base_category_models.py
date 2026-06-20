@@ -11,16 +11,17 @@ from src.models.category_collection_model import Category
 class CategoryRepository(Data_base_Base_mode):
     def __init__(self, db_client: object, db_name: str):
         super().__init__(db_client=db_client)
-        self.db = db_client  # Autism_chat_bot
+        self.db = db_client
 
     
-
+    '''
     async def create_category_chunks_for_indexing(self, category: Category):
         # هنا انا محتاجة اعمل انديكسينج علي مستوي الكوليكشن بتاعت الشانكس بس الي بتتعمل في فانكشن في البروسيس فايل 
         # مجرد الابلود هينادي  كرييت كاتيجوري في الكوليكشن العادية الي بتتحتفظ بس بالميتا داتا بتاعت الملفات
         # هنا انا بعمل كوليكشن مش شانكنج خالص 
         category_name=category.name
         chunks_collection_name = f"{category_name}_chunks"
+        
         
         all_collections=await self.db_client.list_collection_names()
         if chunks_collection_name not in all_collections: # new collection
@@ -35,6 +36,7 @@ class CategoryRepository(Data_base_Base_mode):
 
        
         return f"collection:{category_name} chunks is created"
+        '''
 
 
     

@@ -2,9 +2,13 @@ import json
 import time
 
 from src.controllers.Base_data_controllers import Base_controllers
-from src.models.db_schemes.books import Book
-from src.models.db_schemes.papers import Paper
-from src.models.db_schemes.chunks import Chunk 
+
+from src.models.db_schemes.Autism_chat_bot_postgres.scheme.books import Books
+from src.models.db_schemes.Autism_chat_bot_postgres.scheme.papers import Papers
+from src.models.db_schemes.Autism_chat_bot_postgres.scheme.chunk_books import Chunk_books 
+from src.models.db_schemes.Autism_chat_bot_postgres.scheme.chunk_papers import Chunk_papers
+
+
 from src.stores.vector_db.providers.QdrantDB import QdrantDBProvider
 from src.stores.llm.llm_enum import Document_type
 from typing import List
