@@ -14,6 +14,8 @@ class VectorDBProviderFactory:
             return QdrantDBProvider(
                 db_path=db_path,
                 distance_method=self.config.VECTOR_DB_DISTANCE_METHOD,
+                db_host=self.config.QDRANT_HOST,
+                db_port=self.config.QDRANT_PORT,
             )
-        
+                    
         return None

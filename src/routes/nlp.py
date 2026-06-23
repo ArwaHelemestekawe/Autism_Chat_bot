@@ -54,7 +54,11 @@ async def index_category(request:Request,category_id:str,push_request:PushReques
         if len(chunks)==0:
             has_record=False
             break
-    is_inserted =nlp_controller.index_into_vector_db(collection_id=category_id,chunks=all_chunks,do_rest=push_request.do_reset)
+    is_inserted =await nlp_controller.index_into_vector_db(
+        collection_id=category_id,
+        chunks=all_chunks
+        ,do_rest=push_request.do_reset,
+        chunk_model=chunk_model)
     if not is_inserted:
         return Responses.CHUNK_VICTORIZED_failed
     else:
@@ -144,9 +148,9 @@ async def search(request:Request,category_id:str,search_request:SearchRequest):
     
     return   JSONResponse(
             content={
-                "signal":Responses.ANSWER_RAG_success.value,
+                #"signal":Responses.ANSWER_RAG_success.value,
                 "content":answer,
-                "query": footer_prompt
+                #"query": footer_prompt
             }
         )
     

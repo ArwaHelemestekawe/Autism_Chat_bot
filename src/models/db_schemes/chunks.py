@@ -17,6 +17,10 @@ class Chunk(BaseModel):
     embedding: Optional[List[float]] = Field(
         None, description="Vector embedding for retrieval (if using RAG)"
     )
+
+    is_vectorized: bool = Field(default=False,
+        description="is it already victorized ? "
+    )
     
     metadata: Optional[Dict[str, Union[str,int]]] = Field(
         None, description="Optional per-chunk metadata (e.g., page number, section)"

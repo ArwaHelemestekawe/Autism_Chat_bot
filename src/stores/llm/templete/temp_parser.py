@@ -5,7 +5,7 @@ class TemplateParser:
     def __init__(self, language: str=None, default_language='english'):
         self.current_path = os.path.dirname(os.path.abspath(__file__))
         self.default_language = default_language
-        self.language = "arabic"
+        self.language = "english"
 
         self.set_language(language)
 

@@ -8,11 +8,11 @@ from typing import List
 
 class QdrantDBProvider(VectorDBInterface):
 
-    def __init__(self, db_path: str, distance_method: str):
-
+    def __init__(self, db_path: str, distance_method: str, db_host: str = "localhost", db_port: int = 6333):
         self.client = None
-        self.db_path = db_path # to store the data files
-        self.distance_method = None
+        self.db_path = db_path
+        self.db_host = db_host
+        self.db_port = db_port
 
         if distance_method == DistanceMethodEnums.COSINE.value:
             self.distance_method = models.Distance.COSINE
@@ -22,7 +22,7 @@ class QdrantDBProvider(VectorDBInterface):
         self.logger = logging.getLogger(__name__)
 
     def connect(self):
-        self.client = QdrantClient(path=self.db_path)
+        self.client = QdrantClient(host=self.db_host, port=self.db_port)
 
     def disconnect(self):
         self.client = None

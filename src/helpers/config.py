@@ -29,6 +29,8 @@ class Settings(BaseSettings):
     VECTOR_DB_BACKEND:str
     VECTOR_DB_PATH:str
     VECTOR_DB_DISTANCE_METHOD:str
+    QDRANT_HOST: str 
+    QDRANT_PORT: int 
 
 
     DEFAULT_LANGUAGE:str
@@ -37,7 +39,7 @@ class Settings(BaseSettings):
 
 
     class Config:
-        env_file="src/.env.example"
+        env_file="src/.env"
 
 
 def get_settings():

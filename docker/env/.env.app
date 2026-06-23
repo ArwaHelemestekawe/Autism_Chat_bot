@@ -2,7 +2,7 @@ APP_NAME="autism_chat_bot"
 APP_VERSION="0.1"
 FILE_ALLOWED_EXTENSION=["text/plain","application/pdf","application/epub+zip"]
 CHUNK_SIZE=512000
-MONGO_URL="mongodb://localhost:27007"
+MONGO_URL="mongodb://mongodb:27017"
 MONGO_DATABASE="Autism_chat_bot"
 
 GENERATION_BACK_END="COHERE"
@@ -22,8 +22,8 @@ GENERATION_DEFAULT_MAX_CHARACTERS=1024
 TEMPRETURE=0.5
 
 
-VECTOR_DB_BACKEND="QDRANT"
-VECTOR_DB_PATH="qdrant_db"
+QDRANT_HOST="qdrant"
+QDRANT_PORT=6333
 VECTOR_DB_DISTANCE_METHOD="cosine"
 
 DEFAULT_LANGUAGE="english"

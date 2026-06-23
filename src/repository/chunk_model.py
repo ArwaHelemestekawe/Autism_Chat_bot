@@ -3,6 +3,7 @@ from src.models.db_schemes.chunks import Chunk
 from src.repository.data_base_base_model import Data_base_Base_mode
 from bson.objectid import ObjectId
 from pymongo import InsertOne
+from bson import ObjectId
 from src.models.enums.response_enums import Responses
 class Chunk_model(Data_base_Base_mode):
     def __init__(self,db_client:object,collection_name:str):
@@ -49,6 +50,14 @@ class Chunk_model(Data_base_Base_mode):
             Chunk(**rec)
             for rec in result
         ]
+    
+
+    async def mark_chunks_as_vectorized(self, chunk_ids: list):
+        object_ids = [ObjectId(cid) for cid in chunk_ids]
+        await self.collection.update_many(
+            {"_id": {"$in": object_ids}},
+            {"$set": {"is_vectorized": True}}
+        )
 
 
 

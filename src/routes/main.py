@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 from src.routes import base,data,nlp
 import asyncio
+from src.utilies.metrics import setup_metrics
 from src.stores.llm.templete.temp_parser import TemplateParser
 from src.stores.vector_db.vector_db_factory import VectorDBProviderFactory
 from src.stores.llm.LLMfactory import LLMProviderFactory
@@ -9,7 +10,7 @@ from src.stores.llm.providers.CoherProvider import Cohere
 from pymongo import AsyncMongoClient
 from src.helpers.config import get_settings
 app=FastAPI()
-
+setup_metrics(app)
 @app.on_event("startup")
 async def start_up_db_client():
     settings=get_settings()

@@ -1,6 +1,6 @@
 import json
 import time
-
+from src.repository.chunk_model import Chunk_model
 from src.controllers.Base_data_controllers import Base_controllers
 from src.models.db_schemes.books import Book
 from src.models.db_schemes.papers import Paper
@@ -30,10 +30,13 @@ class Nlp_controller(Base_controllers):
           return collection_info
     
 
-    def index_into_vector_db(self, collection_id, chunks, do_rest=False):
+    async def index_into_vector_db(self, collection_id, chunks, chunk_model:Chunk_model,do_rest=False):
         _ = self.vector_dbclient.create_collection(collection_name=collection_id, 
                                 embedding_size=1024,
                                 do_reset=do_rest)
+        
+        chunks=[c for c in chunks if not c.is_vectorized]
+
 
         text = [c.content for c in chunks]
         metadata = [c.metadata for c in chunks]
@@ -61,6 +64,11 @@ class Nlp_controller(Base_controllers):
             metadata=metadata,
             document_name=document_name
         )
+
+        chunk_ids = [c.id for c in chunks] # نحتفظ بيهم عشان نعرف انهي الي حصله شانكينج تحديدا 
+        await chunk_model.mark_chunks_as_vectorized(chunk_ids)
+
+
         return True
     
 
