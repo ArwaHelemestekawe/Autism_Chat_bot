@@ -1,2 +1,4 @@
 mongodb
 .env
+/mnt/c/Users/arwah/Autism_Chat_bot/docker/env/.env.app
+/mnt/c/Users/arwah/Autism_Chat_bot/docker/env/.env.grafana
