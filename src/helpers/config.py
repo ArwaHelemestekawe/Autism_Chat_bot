@@ -41,6 +41,7 @@ class Settings(BaseSettings):
     
     QDRANT_HOST:str
     QDRANT_PORT:int
+    
 
 
 
