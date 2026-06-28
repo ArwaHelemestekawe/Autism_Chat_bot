@@ -31,7 +31,7 @@ async def start_up_db_client():
     # testing git
 
     app.vector_db_client=vector_db_factory.create(settings.VECTOR_DB_BACKEND)
-    app.vector_db_client.connect(use_cloud=False,cloud_url=settings.QUADRANT_END_POINT_CLUSTER,api_key=settings.QUADRANT_KEY_CLUSTER)
+    app.vector_db_client.connect(use_cloud=True,cloud_url=settings.QUADRANT_END_POINT_CLUSTER,api_key=settings.QUADRANT_KEY_CLUSTER)
 
     #temp parser
 
