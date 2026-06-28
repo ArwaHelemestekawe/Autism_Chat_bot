@@ -319,4 +319,4 @@ docker compose up -d
 | **LLM** | Cohere / OpenAI |
 | **Reverse Proxy** | Nginx |
 | **Monitoring** | Prometheus + Grafana |
-| **Containerization** | Docker + Docker Compose |
+| **Containerization** | Docker + Docker Compose | 
