@@ -35,6 +35,12 @@ class Settings(BaseSettings):
 
     DEFAULT_LANGUAGE:str
     LANGUAGE:str
+    QUADRANT_END_POINT_CLUSTER:str
+    QUADRANT_KEY_CLUSTER:str
+
+    
+    QDRANT_HOST:str
+    QDRANT_PORT:int
 
 
 

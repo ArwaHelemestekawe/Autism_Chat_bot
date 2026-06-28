@@ -21,8 +21,11 @@ class QdrantDBProvider(VectorDBInterface):
 
         self.logger = logging.getLogger(__name__)
 
-    def connect(self):
-        self.client = QdrantClient(host=self.db_host, port=self.db_port)
+    def connect(self, use_cloud: bool = False, cloud_url: str = None, api_key: str = None):
+        if use_cloud and cloud_url and api_key:
+            self.client = QdrantClient(url=cloud_url, api_key=api_key)
+        else:
+            self.client = QdrantClient(host=self.db_host, port=self.db_port)
 
     def disconnect(self):
         self.client = None
