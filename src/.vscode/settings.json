@@ -1,0 +1,6 @@
+{
+  "python.defaultInterpreterPath": "/home/arwah/miniconda3/envs/autism/bin/python",
+  "python.analysis.extraPaths": [
+    "./"
+  ]
+}
