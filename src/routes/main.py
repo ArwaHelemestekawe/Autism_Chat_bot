@@ -28,6 +28,7 @@ async def start_up_db_client():
     app.embedding_client.set_embedding_model(model_id=settings.EMBEDDING_MODEL_ID,embeding_size=settings.EMBEDDING_MODEL_SIZE)
     
     # vactor data base client
+    # testing git
 
     app.vector_db_client=vector_db_factory.create(settings.VECTOR_DB_BACKEND)
     app.vector_db_client.connect(use_cloud=False,cloud_url=settings.QUADRANT_END_POINT_CLUSTER,api_key=settings.QUADRANT_KEY_CLUSTER)
